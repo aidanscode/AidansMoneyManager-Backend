@@ -1,6 +1,6 @@
 const dbUrl = `${process.env['COUCHDB_URL']}`
 const nano = require('nano')(dbUrl)
-const Database = require('../data/db')
+const Database = require('../../data/db')
 
 module.exports = async () => {
   console.log(`Destroying DB ${Database.getDatabaseName('users')}...`)
