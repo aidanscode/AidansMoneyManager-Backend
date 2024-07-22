@@ -1,5 +1,6 @@
 const UserDao = require('../../data/dao/user')
 const passwordUtils = require('../../auth/password')
+const authToken = require('../../auth/auth-token')
 
 const signupController = async (req, res) => {
   const validationErrors = getInputValidationErrors(req)
@@ -15,7 +16,8 @@ const signupController = async (req, res) => {
       .json({ errors: ['Invalid login credentials supplied'] })
   }
 
-  res.send(`<h1>Welcome, ${user.email}`)
+  const token = authToken.generate(user)
+  res.json({ success: true, authToken: token })
 }
 
 const getInputValidationErrors = req => {
