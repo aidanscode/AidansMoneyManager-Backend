@@ -16,7 +16,14 @@ const UserDao = {
     return user
   },
   getByEmail: async email => {
-    return null
+    const users = new Database(userDatabaseName)
+    const response = await users.getFromView(
+      'users',
+      'users-by-email',
+      email,
+      true
+    )
+    return response.rows.length ? response.rows[0].doc : null
   }
 }
 

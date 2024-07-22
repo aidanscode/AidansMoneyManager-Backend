@@ -21,8 +21,15 @@ class Database {
     }
   }
 
+  async getFromView(designDoc, view, key = undefined, includeDocs = false) {
+    return await this.db.view(designDoc, view, {
+      key: key,
+      include_docs: includeDocs
+    })
+  }
+
   async insert(doc, id = undefined) {
-    return await this.db.insert(doc, id)
+    return await this.db.insert({ type: 'user', ...doc }, id)
   }
 }
 
