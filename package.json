@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "prettier . -w",
-    "dev": "cd src/ && nodemon index.js",
-    "migrate": "cd src/ && node migration/index.js"
+    "dev": "nodemon src/index.js",
+    "migrate": "node src/migration/index.js"
   },
   "author": "Aidan Murphey",
   "license": "UNLICENSED",
