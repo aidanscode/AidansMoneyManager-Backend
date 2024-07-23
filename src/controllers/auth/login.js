@@ -16,7 +16,7 @@ const signupController = async (req, res) => {
       .json({ errors: ['Invalid login credentials supplied'] })
   }
 
-  const token = authToken.generate(user)
+  const token = authToken.generate({ id: user._id, email: user.email })
   res.json({ success: true, authToken: token })
 }
 
