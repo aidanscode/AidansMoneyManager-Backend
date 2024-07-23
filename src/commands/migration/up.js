@@ -7,14 +7,14 @@ module.exports = async () => {
   console.log(`Creating DB ${usersDatabase}...`)
   await nano.db.create(usersDatabase)
 
-  console.log('Creating users-by-email view')
+  console.log('Creating by-email view')
   const usersByEmailMap = doc => {
     if (doc.type == 'user') emit(doc.email, doc._id)
   }
   await nano.use(usersDatabase).insert({
     _id: '_design/users',
     views: {
-      'users-by-email': {
+      'by-email': {
         map: usersByEmailMap.toString()
       }
     }
