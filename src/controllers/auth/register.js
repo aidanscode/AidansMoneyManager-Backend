@@ -1,7 +1,7 @@
 const UserDao = require('../../data/dao/user')
 const passwordUtils = require('../../auth/password')
 
-const signupController = async (req, res) => {
+const registerController = async (req, res) => {
   const validationErrors = getInputValidationErrors(req)
   if (validationErrors.length) {
     return res.status(400).json({ errors: validationErrors })
@@ -39,4 +39,4 @@ const createUser = async (email, password) => {
   return userId
 }
 
-module.exports = signupController
+module.exports = registerController
