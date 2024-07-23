@@ -6,7 +6,8 @@ const UserDao = {
     const users = new Database(userDatabaseName)
     const { id } = await users.insert({
       email: email,
-      password: hashedPassword
+      password: hashedPassword,
+      type: 'user'
     })
     return id
   },

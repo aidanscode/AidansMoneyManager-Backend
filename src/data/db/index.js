@@ -29,7 +29,7 @@ class Database {
   }
 
   async insert(doc, id = undefined) {
-    return await this.db.insert({ type: 'user', ...doc }, id)
+    return await this.db.insert(doc, id)
   }
 }
 
