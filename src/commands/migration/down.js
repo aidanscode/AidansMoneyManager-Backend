@@ -6,6 +6,9 @@ module.exports = async () => {
   console.log(`Destroying DB ${Database.getDatabaseName('users')}...`)
   tryDestroy(Database.getDatabaseName('users'))
 
+  console.log(`Destroying DB ${Database.getDatabaseName('budgets')}...`)
+  tryDestroy(Database.getDatabaseName('budgets'))
+
   console.log('Migration complete!')
 }
 
