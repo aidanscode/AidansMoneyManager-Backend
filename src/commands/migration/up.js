@@ -38,7 +38,7 @@ const setupBudgets = async () => {
   }
   const budgetsByTimeframeMap = doc => {
     if (doc.type == 'budget')
-      emit(`${doc.period.month}-${doc.period.year}-${doc.user_id}`, doc._id)
+      emit(`${doc.period.year}-${doc.period.month}-${doc.user_id}`, doc._id)
   }
   await nano.use(budgetsDatabase).insert({
     _id: '_design/budgets',
