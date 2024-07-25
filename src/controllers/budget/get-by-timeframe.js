@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
       .status(404)
       .json({ errors: ['No budget found for given time period'] })
   }
-  res.json({ period: budget.period, budget: budget.budget })
+  res.json({ budget: budget })
 }
 
 const normalizeTimeframe = req => {
