@@ -11,12 +11,17 @@ const BudgetDao = {
       true
     )
     return response.rows.length ? response.rows[0].doc : null
+  },
+  getByUser: async userId => {
+    const budgets = new Database(budgetsDatabaseName)
+    const response = await budgets.getFromView(
+      'budgets',
+      'by-user',
+      userId,
+      true
+    )
+    return response.rows.map(row => row.doc)
   }
-  //   getByEmail: async email => {
-  //     const users = new Database(userDatabaseName)
-  //     const response = await users.getFromView('users', 'by-email', email, true)
-  //     return response.rows.length ? response.rows[0].doc : null
-  //   }
 }
 
 module.exports = BudgetDao
