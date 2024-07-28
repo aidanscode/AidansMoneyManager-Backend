@@ -31,6 +31,14 @@ class Database {
   async insert(doc, id = undefined) {
     return await this.db.insert(doc, id)
   }
+
+  async update(doc) {
+    return await this.db.insert(doc)
+  }
+
+  async destroy(id, rev) {
+    return await this.db.destroy(id, rev)
+  }
 }
 
 module.exports = Database

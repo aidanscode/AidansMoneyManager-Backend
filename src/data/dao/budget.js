@@ -24,7 +24,11 @@ const BudgetDao = {
   },
   update: async document => {
     const budgets = new Database(budgetsDatabaseName)
-    await budgets.insert(document)
+    await budgets.update(document)
+  },
+  delete: async (id, rev) => {
+    const budgets = new Database(budgetsDatabaseName)
+    await budgets.destroy(id, rev)
   }
 }
 

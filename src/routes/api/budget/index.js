@@ -10,5 +10,6 @@ router.get(
   require('../../../controllers/budget/get-by-timeframe')
 )
 router.put('/:year/:month', require('../../../controllers/budget/edit'))
+router.delete('/:year/:month', require('../../../controllers/budget/delete'))
 
 module.exports = router
