@@ -1,7 +1,8 @@
 const BudgetDao = require('../../data/dao/budget')
+const { getTimeframe } = require('../../util/req')
 
 module.exports = async (req, res) => {
-  const { year, month } = normalizeTimeframe(req)
+  const { year, month } = getTimeframe(req)
   if (!year || !month) {
     return res
       .status(400)
@@ -14,20 +15,4 @@ module.exports = async (req, res) => {
       .json({ errors: ['No budget found for given time period'] })
   }
   res.json({ budget: budget.budget })
-}
-
-const normalizeTimeframe = req => {
-  const { year, month } = req.params
-  if (!year || !month) {
-    return {}
-  }
-
-  if (isNaN(year) || isNaN(month)) {
-    return {}
-  }
-
-  return {
-    year: Math.floor(Number(year)),
-    month: Math.floor(Number(month))
-  }
 }
