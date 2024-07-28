@@ -7,27 +7,23 @@ module.exports = async (req, res) => {
 }
 
 const formatBudgets = budgets => {
-  const result = {}
+  const budgetsByYear = groupByPeriod(budgets, 'year')
 
-  const budgetsByYear = groupByPeriod(budgets, 'year', false, b => b)
+  const result = {}
   Object.entries(budgetsByYear).forEach(([year, budgetsInYear]) => {
-    result[year] = groupByPeriod(budgetsInYear, 'month', true, b => b._id)
+    result[year] = budgetsInYear.map(budget => budget.period.month)
   })
 
   return result
 }
 
-const groupByPeriod = (budgets, periodType, flat, mapBudget) => {
+const groupByPeriod = (budgets, periodType) => {
   const grouping = {}
   budgets.forEach(budget => {
-    if (flat) {
-      grouping[budget.period[periodType]] = mapBudget(budget)
-    } else {
-      grouping[budget.period[periodType]] =
-        grouping[budget.period[periodType]] ?? []
+    grouping[budget.period[periodType]] =
+      grouping[budget.period[periodType]] ?? []
 
-      grouping[budget.period[periodType]].push(mapBudget(budget))
-    }
+    grouping[budget.period[periodType]].push(budget)
   })
 
   return grouping
