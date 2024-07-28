@@ -21,6 +21,10 @@ const BudgetDao = {
       true
     )
     return response.rows.map(row => row.doc)
+  },
+  update: async document => {
+    const budgets = new Database(budgetsDatabaseName)
+    await budgets.insert(document)
   }
 }
 
