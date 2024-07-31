@@ -1,4 +1,5 @@
 const authTokenUtils = require('../auth/auth-token')
+const { cookieName } = require('../auth/auth-token')
 
 module.exports = (req, res, next) => {
   const authToken = getAuthToken(req)
@@ -16,10 +17,16 @@ module.exports = (req, res, next) => {
 }
 
 const getAuthToken = req => {
-  let token = getAuthTokenFromAuthorizationHeader(req)
+  let token = getAuthTokenFromCookie()
+  if (!token) token = getAuthTokenFromAuthorizationHeader(req)
   if (!token) token = getAuthTokenFromBody(req)
 
   return token ? token : null
+}
+
+const getAuthTokenFromCookie = req => {
+  const authToken = req.cookies[cookieName]
+  return authToken && authToken.length ? authToken : null
 }
 
 const getAuthTokenFromAuthorizationHeader = req => {
