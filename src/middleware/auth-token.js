@@ -5,8 +5,11 @@ module.exports = (req, res, next) => {
   const authToken = getAuthToken(req)
   if (authToken && (decoded = authTokenUtils.verify(authToken))) {
     req.auth = {
-      id: decoded.id,
-      email: decoded.email
+      token: authToken,
+      user: {
+        id: decoded.id,
+        email: decoded.email
+      }
     }
     next()
   } else {
@@ -17,7 +20,7 @@ module.exports = (req, res, next) => {
 }
 
 const getAuthToken = req => {
-  let token = getAuthTokenFromCookie()
+  let token = getAuthTokenFromCookie(req)
   if (!token) token = getAuthTokenFromAuthorizationHeader(req)
   if (!token) token = getAuthTokenFromBody(req)
 
@@ -25,7 +28,7 @@ const getAuthToken = req => {
 }
 
 const getAuthTokenFromCookie = req => {
-  const authToken = req.cookies[cookieName]
+  const authToken = req.cookies ? req.cookies[cookieName] : undefined
   return authToken && authToken.length ? authToken : null
 }
 

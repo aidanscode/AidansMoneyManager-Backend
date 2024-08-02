@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   const originalBudget = await BudgetDao.getByTimeframe(
     year,
     month,
-    req.auth.id
+    req.auth.user.id
   )
   if (!originalBudget) {
     return res

@@ -13,5 +13,10 @@ module.exports = {
     } catch (error) {
       return false
     }
+  },
+  getExpiry: accessToken => {
+    const split = accessToken.split('.')
+    const payload = JSON.parse(atob(split[1]))
+    return payload.exp
   }
 }

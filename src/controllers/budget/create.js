@@ -14,6 +14,6 @@ module.exports = async (req, res) => {
     return res.status(400).json({ errors: ['Missing budget data'] })
   }
 
-  await BudgetDao.create(newBudgetData, year, month, req.auth.id)
+  await BudgetDao.create(newBudgetData, year, month, req.auth.user.id)
   return res.json({ success: true })
 }

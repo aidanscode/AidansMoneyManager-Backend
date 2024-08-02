@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
       .status(400)
       .json({ errors: ['Invalid or missing year/month given'] })
   }
-  const budget = await BudgetDao.getByTimeframe(year, month, req.auth.id)
+  const budget = await BudgetDao.getByTimeframe(year, month, req.auth.user.id)
   if (!budget) {
     return res
       .status(404)
