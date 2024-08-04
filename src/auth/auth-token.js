@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
   cookieName: 'amm_auth_token',
+  cookieOptions: { httpOnly: true, sameSite: true },
   generate: data => {
     return jwt.sign(data, process.env['JWT_SECRET'], {
       expiresIn: process.env['JWT_TTL']

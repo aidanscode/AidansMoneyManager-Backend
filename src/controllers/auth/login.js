@@ -1,7 +1,7 @@
 const UserDao = require('../../data/dao/user')
 const passwordUtils = require('../../auth/password')
 const authToken = require('../../auth/auth-token')
-const { cookieName } = require('../../auth/auth-token')
+const { cookieName, cookieOptions } = require('../../auth/auth-token')
 
 const signupController = async (req, res) => {
   const validationErrors = getInputValidationErrors(req)
@@ -19,7 +19,7 @@ const signupController = async (req, res) => {
 
   const token = authToken.generate({ id: user._id, email: user.email })
 
-  res.cookie(cookieName, token, { httpOnly: true, sameSite: true })
+  res.cookie(cookieName, token, cookieOptions)
   res.json({ success: true, authToken: token })
 }
 
